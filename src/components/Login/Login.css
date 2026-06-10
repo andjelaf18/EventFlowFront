@@ -1,0 +1,92 @@
+
+.login {
+    max-width: 400px;
+    margin: 120px auto 60px auto;
+    padding: 30px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.login h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #37517e;
+}
+
+.login .btn-getstarted {
+    background: #47b2e4;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.login .btn-getstarted:hover {
+    background: #3a9bd1;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .login {
+        margin: 100px 20px 40px 20px;
+        padding: 20px;
+    }
+}
+
+
+
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper input {
+    padding-right: 44px;
+}
+
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    color: #6c757d;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+.loader-blocker {
+    position: fixed;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.78);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader-spinner {
+    width: 54px;
+    height: 54px;
+    border: 5px solid #dbeafe;
+    border-top-color: #0d6efd;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+.loader-blocker p {
+    font-weight: 600;
+    color: #37517e;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

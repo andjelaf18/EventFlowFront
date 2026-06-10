@@ -1,0 +1,60 @@
+body {
+  background-color: #F6F8FB;
+}
+
+.sekcija-kontejner {
+  width: 100%;
+}
+
+.naslov {
+  margin-bottom: 25px;  
+  color: #37517e;
+  padding: 20px;
+  font-weight: 600;
+}
+
+.dugmePlavo{
+  background-color: #37517e;
+  color:white;
+}
+
+.zahtevi-forma-panel{
+  background: white;
+  padding: 40px;
+  /*  gap:100px;*/
+  column-gap: 100px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  border: 1px solid #edf2f7;
+  width: 80%;
+}
+
+.clan-kartica-izbor {
+  background-color: #f8f9fa;
+  border-color: #dee2e6 !important;
+}
+
+.clan-kartica-izbor:hover {
+  background-color: #f1f3f5;
+  border-color: #ced4da !important;
+}
+
+.clan-kartica-izbor.selektovan-clan {
+  background-color: #e7f1ff !important; /* Blaga plava pozadina */
+  border-color: #0d6efd !important;     /* Bootstrap primarna plava ivica */
+  box-shadow: 0 0 0 1px #0d6efd;
+}
+
+.clanovi-izbor-lista {
+  max-height: 280px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.zahtevi-filter-dugmad {
+    margin-top: 22px;
+    margin-bottom: 12px;
+    padding-top: 16px;
+    border-top: 1px solid #e9ecef;
+}

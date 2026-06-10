@@ -1,0 +1,103 @@
+.naslov {
+  margin-bottom: 25px;  
+  color:#37517e;
+  padding: 20px;
+  font-weight: 600;
+}
+
+.dostupnost-wrapper{
+
+    margin-top: 40px;
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+}
+
+.dostupnost-naslov{
+
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.dostupnost-tabela th{
+
+    background-color: #f5f7fb;
+}
+
+.status-polje{
+
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.dostupan{
+
+    background-color: #d1f7dc;
+    color: #146c2e;
+}
+
+.zauzet{
+
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.nedostupan{
+
+    background-color: #f8d7da;
+    color: #842029;
+}
+
+.dostupnost-wrapper{
+
+    margin-top: 40px;
+    background: white;
+    padding: 25px;
+    border-radius: 18px;
+}
+
+.dostupnost-naslov{
+
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.dostupnost-tabela{
+
+    vertical-align: middle;
+}
+
+.dostupnost-tabela th{
+
+    text-align: center;
+    background-color: #f5f7fb;
+}
+
+.dostupnost-tabela td{
+
+    text-align: center;
+}
+
+.slot-box{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.tekst-slobodan{
+
+    color: green;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.tekst-zauzet{
+
+    color: red;
+    font-size: 13px;
+    font-weight: 600;
+}

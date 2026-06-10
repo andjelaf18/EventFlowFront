@@ -1,0 +1,86 @@
+.taskovi-wrapper {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.taskovi-card {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 26px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.taskovi-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.taskovi-header h4 {
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.taskovi-header p {
+    color: #6c757d;
+    margin: 0;
+}
+
+.taskovi-broj {
+    min-width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #eef4ff;
+    color: #0d6efd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+}
+
+.taskovi-broj.zavrseni {
+    background: #d1e7dd;
+    color: #0f5132;
+}
+
+.taskovi-table thead th {
+    color: #6c757d;
+    font-weight: 700;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.task-opis {
+    max-width: 320px;
+    white-space: normal;
+}
+
+.task-status {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.status-0 {
+    background: #d1e7dd;
+    color: #0f5132;
+}
+
+.status-1 {
+    background: #f8d7da;
+    color: #842029;
+}
+
+.status-2 {
+    background: #cfe2ff;
+    color: #084298;
+}
+
+.status-3 {
+    background: #fff3cd;
+    color: #664d03;
+}

@@ -1,0 +1,65 @@
+.dostupnost-wrapper {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.dostupnost-form-card,
+.dostupnost-tabela-card {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 26px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.dostupnost-form-card h4,
+.dostupnost-tabela-card h4 {
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.dostupnost-table thead th {
+    color: #6c757d;
+    font-weight: 700;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.status-0 {
+    background: #d1e7dd;
+    color: #0f5132;
+}
+
+.status-1 {
+    background: #fff3cd;
+    color: #664d03;
+}
+
+.status-2 {
+    background: #e2e3e5;
+    color: #41464b;
+}
+
+.custom-dostupnost-input {
+    position: relative;
+}
+
+.custom-dostupnost-input.empty:not(:focus)::-webkit-datetime-edit {
+    color: transparent;
+}
+
+.custom-dostupnost-input.empty:not(:focus)::before {
+    content: attr(data-placeholder);
+    position: absolute;
+    left: 12px;
+    color: #6c757d;
+    pointer-events: none;
+}

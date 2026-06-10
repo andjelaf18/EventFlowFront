@@ -1,0 +1,99 @@
+.clan-profil-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 25px;
+}
+
+.clan-profil-card {
+    width: 100%;
+    max-width: 650px;
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 30px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.clan-header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.clan-avatar {
+    width: 82px;
+    height: 82px;
+    border-radius: 50%;
+    background: #eef4ff;
+    color: #0d6efd;
+    font-size: 36px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 14px;
+}
+
+.clan-header h3 {
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.clan-badge {
+    background: #0d6efd;
+    color: white;
+    padding: 7px 18px;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.clan-info-box {
+    background: #f8f9fa;
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 18px;
+}
+
+.clan-info-box h5 {
+    font-weight: 700;
+    margin-bottom: 14px;
+}
+
+.info-red {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.info-red:last-child {
+    border-bottom: none;
+}
+
+.info-red span {
+    color: #6c757d;
+}
+
+.info-red strong {
+    color: #212529;
+    text-align: right;
+}
+
+.clan-napomena {
+    display: flex;
+    gap: 12px;
+    background: #eef4ff;
+    color: #334155;
+    border-radius: 14px;
+    padding: 16px;
+    margin-top: 20px;
+}
+
+.clan-napomena i {
+    color: #0d6efd;
+    font-size: 1.3rem;
+}
+
+.clan-napomena p {
+    margin: 0;
+}

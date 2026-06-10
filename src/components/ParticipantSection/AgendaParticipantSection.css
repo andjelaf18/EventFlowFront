@@ -1,0 +1,47 @@
+body{
+  background-color: #F6F8FB;
+}
+
+.sekcija-kontejner {
+  width: 100%;
+}
+
+.naslov {
+  margin-bottom: 25px;  
+  color:#37517e;
+  padding: 20px;
+  font-weight: 600;
+}
+
+.table-primary-light {
+  background-color: rgba(30, 58, 138, 0.04) !important;
+}
+
+.sesija-card {
+  transition: all 0.2s ease-in-out;
+}
+
+.sesija-card:hover {
+  transform: translateY(-2px);
+}
+
+.table th {
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.tekstPanelLevo{
+  color:#37517e;
+}
+
+.btn-tanji {
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
+  font-size: 12px !important;
+  line-height: 1.2 !important;
+  height: auto; 
+}
+
+.agenda-table td {
+  vertical-align: middle;
+}
