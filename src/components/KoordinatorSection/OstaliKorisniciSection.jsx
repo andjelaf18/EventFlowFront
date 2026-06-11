@@ -2,7 +2,7 @@ import './OstaliKorisniciSection.css'
 import Alert from '../Alerts/Alerts';
 import { useState, useEffect } from 'react';
 
-function OstaliKorisnici(){
+function OstaliKorisnici() {
 
     const [filterRole, setFilterRole] = useState("");
     const [filterKomitet, setFilterKomitet] = useState("");
@@ -10,11 +10,11 @@ function OstaliKorisnici(){
     const [filterAlergije, setFilterAlergije] = useState("");
     const [komiteti, setKomiteti] = useState([]);
     const [loading, setLoading] = useState(true); //ovo je iz clanovi nisam sigurna da li mi je potrebno i ovde 
-   
+
     // State za filtere
     const [searchQuery, setSearchQuery] = useState("");
     //const [selectedClan, setSelectedClan] = useState(null);
-   
+
     //OVO NE DIRAJ AKO ZA BOGA ZNAS
     //state za brisanje 
     const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -26,12 +26,11 @@ function OstaliKorisnici(){
     //za kartice
     const [clanovi, setClanovi] = useState([]);
     const [filtriraniClanovi, setFiltriraniClanovi] = useState([]);
-        const [filtriraniClanovi, setFiltriraniClanovi] = useState([]);
-
+    const [sviKorisnici, setSviKorisnici] = useState([]);
     //alerts
     const [alertInfo, setAlertInfo] = useState({
         poruka: "",
-        tip: "" 
+        tip: ""
     });
     //za izmenu i pregled
     const [selectedKorisnik, setSelectedKorisnik] = useState(null);
@@ -42,14 +41,14 @@ function OstaliKorisnici(){
     };
 
     const ishranaTekst = (id) => {
-        switch(id) {
+        switch (id) {
             case 0: return "Vegan";
             case 1: return "Vegetarijanac";
             default: return "Mesojed";
         }
     };
 
-        const statsIzvor = sviKorisnici.length > 0 ? sviKorisnici : clanovi;
+    const statsIzvor = sviKorisnici.length > 0 ? sviKorisnici : clanovi;
 
     const stats = { //ZA KARTICE
         ukupno: statsIzvor.length,
@@ -65,13 +64,13 @@ function OstaliKorisnici(){
     //if (loading) return <div>Učitavanje...</div>;
 
     const handleDeleteClick = (korisnik) => {
-    setSelectedKorisnik(korisnik);
-    setShowDeleteModal(true);
+        setSelectedKorisnik(korisnik);
+        setShowDeleteModal(true);
     };
 
     const confirmDelete = async () => {
         if (!selectedKorisnik) return;
-        
+
         const token = localStorage.getItem("token");
         const korisnikId = selectedKorisnik.id || selectedKorisnik.Id;
 
@@ -91,22 +90,22 @@ function OstaliKorisnici(){
                 const noviClanovi = clanovi.filter(c => (c.id || c.Id) !== korisnikId);
                 setClanovi(noviClanovi);
                 setFiltriraniClanovi(noviClanovi);
-                
+
                 // Zatvaramo modal i čistimo selektovanog korisnika
                 setShowDeleteModal(false);
                 setSelectedKorisnik(null);
-                 setAlertInfo({
+                setAlertInfo({
                     poruka: "Uspešno brisanje.",
                     tip: "success"
                 });
             } else {
-                 setAlertInfo({
+                setAlertInfo({
                     poruka: "Greška pri brisanju.",
                     tip: "danger"
                 });
             }
         }
-        catch(err) {
+        catch (err) {
             console.error("Mrežna greška pri brisanju:", err);
         }
     };
@@ -124,11 +123,11 @@ function OstaliKorisnici(){
                     }
                 );
 
-                if(res.ok){
+                if (res.ok) {
                     const data = await res.json();
                     setKomiteti(data);
                 }
-            } catch(err){
+            } catch (err) {
                 console.error(err);
             }
         };
@@ -187,16 +186,16 @@ function OstaliKorisnici(){
                     }
                 });
 
-                if(res.ok){
+                if (res.ok) {
                     const data = await res.json();
                     //console.log(data);
                     setClanovi(data);
                     setFiltriraniClanovi(data);
                 }
-            } 
-            catch(err){
+            }
+            catch (err) {
                 console.error(err);
-            } 
+            }
             finally {
                 setLoading(false);
             }
@@ -211,7 +210,7 @@ function OstaliKorisnici(){
             id: korisnik.id || korisnik.Id,
             ime: korisnik.ime || korisnik.Ime,
             prezime: korisnik.prezime || korisnik.Prezime,
-           // email: korisnik.email || korisnik.Email, 
+            // email: korisnik.email || korisnik.Email, 
             //brojTelefona: korisnik.brojTelefona || korisnik.BrojTelefona,
             komitet: korisnik.komitet || korisnik.Komitet,
             ishrana: korisnik.ishrana !== undefined ? korisnik.ishrana : korisnik.Ishrana,
@@ -225,16 +224,16 @@ function OstaliKorisnici(){
         const token = localStorage.getItem("token");
 
         const dto = {
-        id: editClan.id,
-        ime: editClan.ime || "",
-        prezime: editClan.prezime || "",
-        // email: editClan.mejl || "", 
-        //brojTelefona: editClan.brojTelefona || "",
-        komitet: editClan.komitet || "",
-        alergije: editClan.alergije || "",
-        role: parseInt(editClan.role) || 0,
-        ishrana: editClan.ishrana !== "" ? parseInt(editClan.ishrana) : 2 
-    };
+            id: editClan.id,
+            ime: editClan.ime || "",
+            prezime: editClan.prezime || "",
+            // email: editClan.mejl || "", 
+            //brojTelefona: editClan.brojTelefona || "",
+            komitet: editClan.komitet || "",
+            alergije: editClan.alergije || "",
+            role: parseInt(editClan.role) || 0,
+            ishrana: editClan.ishrana !== "" ? parseInt(editClan.ishrana) : 2
+        };
         //console.log("Šaljem sledeći DTO:", dto);
 
         try {
@@ -251,14 +250,14 @@ function OstaliKorisnici(){
                 setShowIzmena(false);
                 //window.location.reload(); 
                 const azuriraniClanovi = clanovi.map(c => {
-                if ((c.id || c.Id) === dto.id) {
-                    return { ...c, ...dto }; 
-                }
-                
-                return c;
-            });
-            setClanovi(azuriraniClanovi);
-            setFiltriraniClanovi(azuriraniClanovi);
+                    if ((c.id || c.Id) === dto.id) {
+                        return { ...c, ...dto };
+                    }
+
+                    return c;
+                });
+                setClanovi(azuriraniClanovi);
+                setFiltriraniClanovi(azuriraniClanovi);
                 setAlertInfo({
                     poruka: "Uspešna izmena podataka o korisniku.",
                     tip: "success"
@@ -279,16 +278,16 @@ function OstaliKorisnici(){
 
     return (
         <>
-        <Alert
-            tip={alertInfo.tip}
-            poruka={alertInfo.poruka}
-            onClose={() =>
-                setAlertInfo({
-                poruka: "",
-                tip: ""
-                })
-            }
-        />
+            <Alert
+                tip={alertInfo.tip}
+                poruka={alertInfo.poruka}
+                onClose={() =>
+                    setAlertInfo({
+                        poruka: "",
+                        tip: ""
+                    })
+                }
+            />
             <div className='sekcija-kontejner'>
                 <h1 className='naslov'>Predavači i participanti</h1>
 
@@ -304,7 +303,7 @@ function OstaliKorisnici(){
                     <div className='stat-kartica'>
                         <div className='stat-ikona plava'><i className="bi bi-person-workspace"></i></div>
                         <div className='stat-tekst'>
-                            <p>Predavači</p> 
+                            <p>Predavači</p>
                             <h3>{stats.predavaci}</h3>
                         </div>
                     </div>
@@ -324,12 +323,12 @@ function OstaliKorisnici(){
                 <div className="row g-3">
 
                     <div className="col-lg-8 position-relative">
-                        <input 
-                                type="text" 
-                                className="form-control ps-5" 
-                                placeholder="Pretraži korisnika (ime ili prezime)..."
-                                value={searchQuery}
-                                onChange={(e) => setSearchQuery(e.target.value)}
+                        <input
+                            type="text"
+                            className="form-control ps-5"
+                            placeholder="Pretraži korisnika (ime ili prezime)..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
                         />
                         <i className="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3"></i>
                     </div>
@@ -342,18 +341,18 @@ function OstaliKorisnici(){
                         </select>
                     </div>
 
-                    <div className="col-lg-4"> 
+                    <div className="col-lg-4">
                         {/*OVAJ DEO NISMO NAVELI U DOKUMENTACIJU DA CE DA POSTOJI 
                         NITI POSTOJI U BACKEND ALI JE FRONTEND PROGRAMER ODLUCIO DA JE LEPSE DA PODELIMO
                         STRANICE ZA CLANOVE I OSTALE (SA VECIM PRIVILEGIJAMA) KORISNIKE. 
                         TI KORISNICI SA VECIM PRIVILEGIJAMA - PREDAVAC I PARTICIPANT IMAJU DOSTA SLICNE PODATKE
                         PA SU ONI ZAJEDNO NA U OVU KOMPONENTU. 
                         DA BI BILO LASKE KOORDINATORU, ODLUCENO JE DA POSTOJI FILTRIRANJE PO ULOZI */}
-                            <select className="form-select"  onChange={(e) => setFilterRole(e.target.value)}>
-                                <option value="">Uloga</option>
-                                <option value="3">Predavač</option>
-                                <option value="2">Participant</option>
-                            </select>
+                        <select className="form-select" onChange={(e) => setFilterRole(e.target.value)}>
+                            <option value="">Uloga</option>
+                            <option value="3">Predavač</option>
+                            <option value="2">Participant</option>
+                        </select>
                     </div>
 
                     <div className="col-lg-4">
@@ -369,11 +368,11 @@ function OstaliKorisnici(){
                         <select className="form-select" onChange={(e) => setFilterKomitet(e.target.value)}>
                             <option value="">Komitet</option>
 
-                        {komiteti.map((k, index) => (
-                            <option key={index} value={k}>
-                                {k}
-                            </option>
-                        ))}
+                            {komiteti.map((k, index) => (
+                                <option key={index} value={k}>
+                                    {k}
+                                </option>
+                            ))}
                         </select>
                     </div>
                 </div>
@@ -407,15 +406,15 @@ function OstaliKorisnici(){
 
                                 <td>
                                     {
-                                        (c.ishrana === 0 || c.Ishrana === 0) ? "Vegan" : 
-                                        (c.ishrana === 1 || c.Ishrana === 1) ? "Vegetarijanac" :
-                                        "Mesojed"
+                                        (c.ishrana === 0 || c.Ishrana === 0) ? "Vegan" :
+                                            (c.ishrana === 1 || c.Ishrana === 1) ? "Vegetarijanac" :
+                                                "Mesojed"
                                     }
                                 </td>
 
                                 <td>
                                     {
-                                       (c.alergije && c.alergije.trim() !== "") ? "Da" : "Ne"
+                                        (c.alergije && c.alergije.trim() !== "") ? "Da" : "Ne"
                                     }
                                 </td>
 
@@ -439,20 +438,20 @@ function OstaliKorisnici(){
                                     >
                                         Izmeni
                                     </button>*/}
-<button
-    className="btn btn-sm btn-outline-info me-2"
-    onClick={() => otvoriIzmenu(c)}
-    title="Izmeni"
->
-     Izmeni
-</button>
-                                     
+                                    <button
+                                        className="btn btn-sm btn-outline-info me-2"
+                                        onClick={() => otvoriIzmenu(c)}
+                                        title="Izmeni"
+                                    >
+                                        Izmeni
+                                    </button>
+
                                     <button
                                         className="btn btn-sm btn-outline-danger"
                                         onClick={() => handleDeleteClick(c)}
                                     >
                                         Obriši
-                                    </button> 
+                                    </button>
                                 </td>
                             </tr>
                         ))}
@@ -462,7 +461,7 @@ function OstaliKorisnici(){
 
             {/*PROZOR KOJI SE OTVARA KADA SE IZABERE DUGME ZA BRISANJE*/}
             {showDeleteModal && selectedKorisnik && (
-                <div className="modal d-block" tabIndex="-1" style={{backgroundColor: 'rgba(0,0,0,0.5)'}}>
+                <div className="modal d-block" tabIndex="-1" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
                     <div className="modal-dialog">
                         <div className="modal-content">
                             <div className="modal-header">
@@ -483,14 +482,14 @@ function OstaliKorisnici(){
                                 </strong>
                             </div>
                             <div className="modal-footer">
-                                <button 
-                                    className="btn btn-secondary" 
+                                <button
+                                    className="btn btn-secondary"
                                     onClick={() => {
                                         setShowDeleteModal(false);
                                         setSelectedKorisnik(null);
                                     }}
-                                > 
-                                    Otkaži 
+                                >
+                                    Otkaži
                                 </button>
                                 <button className="btn btn-danger" onClick={confirmDelete}>Obriši</button>
                             </div>
@@ -501,7 +500,7 @@ function OstaliKorisnici(){
 
             {/*PROZOR KOJI SE OTVARA KADA SE IZBERE DUGME ZA PREGLED*/}
             {showPregled && selectedKorisnik && (
-                <div className="modal d-block" tabIndex="-1" style={{backgroundColor: 'rgba(0,0,0,0.5)'}}>
+                <div className="modal d-block" tabIndex="-1" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
                     <div className="modal-dialog">
                         <div className="modal-content">
                             <div className="modal-header">
@@ -526,7 +525,7 @@ function OstaliKorisnici(){
 
             {/* PROZOR ZA IZMENU */}
             {showIzmena && editClan && (
-                <div className="modal d-block" tabIndex="-1" style={{backgroundColor: 'rgba(0,0,0,0.5)'}}>
+                <div className="modal d-block" tabIndex="-1" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
                     <div className="modal-dialog">
                         <div className="modal-content">
                             <div className="modal-header">
@@ -540,7 +539,7 @@ function OstaliKorisnici(){
                                         type="text"
                                         className="form-control"
                                         value={editClan.ime || ""}
-                                        onChange={(e) => setEditClan({...editClan, ime: e.target.value})}
+                                        onChange={(e) => setEditClan({ ...editClan, ime: e.target.value })}
                                     />
                                 </div>
                                 <div className="mb-3">
@@ -549,7 +548,7 @@ function OstaliKorisnici(){
                                         type="text"
                                         className="form-control"
                                         value={editClan.prezime || ""}
-                                        onChange={(e) => setEditClan({...editClan, prezime: e.target.value})}
+                                        onChange={(e) => setEditClan({ ...editClan, prezime: e.target.value })}
                                     />
                                 </div>
                                 <div className="mb-3">
@@ -558,7 +557,7 @@ function OstaliKorisnici(){
                                         type="email"
                                         className="form-control"
                                         value={editClan.mejl || ""}
-                                        onChange={(e) => setEditClan({...editClan, mejl: e.target.value})}
+                                        onChange={(e) => setEditClan({ ...editClan, mejl: e.target.value })}
                                     />
                                 </div>
                                 <div className="mb-3">
@@ -567,7 +566,7 @@ function OstaliKorisnici(){
                                         type="text"
                                         className="form-control"
                                         value={editClan.brojTelefona || ""}
-                                        onChange={(e) => setEditClan({...editClan, brojTelefona: e.target.value})}
+                                        onChange={(e) => setEditClan({ ...editClan, brojTelefona: e.target.value })}
                                     />
                                 </div>
                                 <div className="mb-3">
@@ -576,15 +575,15 @@ function OstaliKorisnici(){
                                         type="text"
                                         className="form-control"
                                         value={editClan.komitet || ""}
-                                        onChange={(e) => setEditClan({...editClan, komitet: e.target.value})}
+                                        onChange={(e) => setEditClan({ ...editClan, komitet: e.target.value })}
                                     />
                                 </div>
                                 <div className="mb-3">
                                     <label className="form-label">Ishrana</label>
-                                    <select 
-                                        className="form-select" 
-                                        value={editClan.ishrana ?? ""} 
-                                        onChange={(e) => setEditClan({...editClan, ishrana: e.target.value})}
+                                    <select
+                                        className="form-select"
+                                        value={editClan.ishrana ?? ""}
+                                        onChange={(e) => setEditClan({ ...editClan, ishrana: e.target.value })}
                                     >
                                         <option value="0">Vegan</option>
                                         <option value="1">Vegetarijanac</option>
@@ -597,10 +596,10 @@ function OstaliKorisnici(){
                                         type="text"
                                         className="form-control"
                                         value={editClan.alergije || ""}
-                                        onChange={(e) => setEditClan({...editClan, alergije: e.target.value})}
+                                        onChange={(e) => setEditClan({ ...editClan, alergije: e.target.value })}
                                     />
                                 </div>
-                                
+
                             </div>
                             <div className="modal-footer">
                                 <button className="btn btn-secondary" onClick={() => setShowIzmena(false)}>Otkaži</button>
@@ -610,8 +609,8 @@ function OstaliKorisnici(){
                     </div>
                 </div>
             )}
-            
+
         </>
     )
 
-}export default OstaliKorisnici
+} export default OstaliKorisnici

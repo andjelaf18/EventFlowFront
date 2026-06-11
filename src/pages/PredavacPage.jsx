@@ -2,8 +2,8 @@ import Panel from '../components/Panel/Panel.jsx';
 import TopPanel from '../components/TopPanel/TopPanel.jsx';
 import DashboardSection from '../components/Dashboard/DashboardSection.jsx';
 import SesijeSection from '../components/PredavacSection/SesijeSection.jsx';
-import PomocOdKoordSection from '../components/PredavacSection/PomocOdKoordSection.jsx';
 import ProfilPredavacSection from '../components/PredavacSection/ProfilPredavacSection.jsx';
+import PomocOdKoordinatora from '../components/PomocOdKoordinatora/PomocOdKoordinatora.jsx';
 
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 
@@ -24,8 +24,8 @@ function Predavac(){
                     <Routes>
                         <Route index element={<DashboardSection />} />
                         <Route path="sesije" element={<SesijeSection />} />
-                        <Route path="pomoc-od-koordinatora" element={<PomocOdKoordSection/>} />
                         <Route path="profil-podesavanja" element={<ProfilPredavacSection/>} />
+                        <Route path="pomoc-od-koordinatora" element={<PomocOdKoordinatora/> } />
                     </Routes>
                 </div>
             </div>

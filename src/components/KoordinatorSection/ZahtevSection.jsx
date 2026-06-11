@@ -165,31 +165,31 @@ function ZahtevSection() {
             default: return <span className="badge bg-secondary">Nepoznato</span>;
         }
     };
-    
-const fetchNedodeljeniZahtevi = async () => {
-    try {
-        const token = localStorage.getItem("token");
 
-        const res = await fetch(
-            "https://localhost:7080/api/Zahtev/nedodeljeni",
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`
+    const fetchNedodeljeniZahtevi = async () => {
+        try {
+            const token = localStorage.getItem("token");
+
+            const res = await fetch(
+                "https://localhost:7080/api/Zahtev/nedodeljeni",
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
                 }
-            }
-        );
+            );
 
-        if (res.ok) {
-            const data = await res.json();
-            setZahtevi(data);
-        } else {
-            const greska = await res.text();
-            console.error("Greška za nedodeljene:", greska);
+            if (res.ok) {
+                const data = await res.json();
+                setZahtevi(data);
+            } else {
+                const greska = await res.text();
+                console.error("Greška za nedodeljene:", greska);
+            }
+        } catch (err) {
+            console.error(err);
         }
-    } catch (err) {
-        console.error(err);
-    }
-};
+    };
 
     return (
         <>
@@ -242,12 +242,20 @@ const fetchNedodeljeniZahtevi = async () => {
                         </button>
                     </form>
 
-                    <div className="mb-3 d-flex gap-2">
-                        <button className="btn btn-outline-primary" onClick={fetchZahtevi}>
+                    <div className="zahtevi-filter-dugmad">
+                        <button
+                            type="button"
+                            className="btn btn-outline-primary"
+                            onClick={fetchZahtevi}
+                        >
                             Svi zahtevi
                         </button>
 
-                        <button className="btn btn-outline-warning" onClick={fetchNedodeljeniZahtevi}>
+                        <button
+                            type="button"
+                            className="btn btn-outline-warning"
+                            onClick={fetchNedodeljeniZahtevi}
+                        >
                             Nedodeljeni zahtevi
                         </button>
                     </div>
@@ -284,7 +292,7 @@ const fetchNedodeljeniZahtevi = async () => {
                                                     zahtev.zaduzeniClan.map(c => {
                                                         const ime = c.ime || c.korisnik?.ime;
                                                         const prezime = c.prezime || c.korisnik?.prezime;
-                                                        
+
                                                         const prikazImenaTabele = (ime && prezime) ? `${ime} ${prezime}` : `Član #${c.id}`;
 
                                                         return (

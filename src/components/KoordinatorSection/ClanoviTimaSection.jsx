@@ -26,7 +26,6 @@ function ClanoviTimaSection() {
     const [isSorted, setIsSorted] = useState(true);
 
     const statusTekst = (status) => {
-        // Pretvaramo u broj jer selekt šalje string "0", "1", a API može vratiti broj
         const s = Number(status);
         switch (s) {
             case 0: return "Slobodan";
@@ -35,6 +34,39 @@ function ClanoviTimaSection() {
             default: return "Nepoznat";
         }
     }
+    const [statistika, setStatistika] = useState({
+        ukupno: 0,
+        slobodni: 0,
+        zauzeti: 0,
+        nedostupni: 0
+    });
+   useEffect(() => {
+    if (!clanovi || clanovi.length === 0) {
+        setStatistika({ ukupno: 0, slobodni: 0, zauzeti: 0, nedostupni: 0 });
+        return;
+    }
+
+    let slobodniCount = 0;
+    let zauzetiCount = 0;
+    let nedostupniCount = 0;
+
+    clanovi.forEach(clan => {
+        const status = Number(clan.status ?? clan.Status);
+
+        if (status === 0) slobodniCount++;
+        else if (status === 1) zauzetiCount++;
+        else if (status === 2) nedostupniCount++;
+    });
+
+    setStatistika({
+        ukupno: clanovi.length,
+        slobodni: slobodniCount,
+        zauzeti: zauzetiCount,
+        nedostupni: nedostupniCount
+    });
+
+}, [clanovi]);
+
     //alerts
     const [alertInfo, setAlertInfo] = useState({
         poruka: "",
@@ -234,7 +266,7 @@ function ClanoviTimaSection() {
                             return Number(trenutniStatus) === Number(filterStatus);
                         });
                     }
-
+setClanovi(data);
                     setFiltriraniClanovi(data);
                 }
             } catch (err) {
@@ -250,14 +282,15 @@ function ClanoviTimaSection() {
         return () => clearTimeout(tajmer);
     }, [searchQuery, filterStatus, isSorted]);
 
-     const vratiStatus = (c) => Number(c.status ?? c.Status);
+    /* const vratiStatus = (c) => Number(c.status ?? c.Status);
 
     const stats = {
         ukupno: clanovi.length,
         slobodni: clanovi.filter(c => vratiStatus(c) === 0).length,
         zauzeti: clanovi.filter(c => vratiStatus(c) === 1).length,
         nedostupan: clanovi.filter(c => vratiStatus(c) === 2).length,
-    };
+    };*/
+
 
     if (loading) return <div>Učitavanje...</div>;
 
@@ -282,7 +315,7 @@ function ClanoviTimaSection() {
                         <div className='stat-ikona plava'><i className="bi bi-people-fill"></i></div>
                         <div className='stat-tekst'>
                             <p>Ukupno članova</p>
-                            <h3>{stats.ukupno}</h3>
+                            <h3>{statistika.ukupno}</h3>
                         </div>
                     </div>
 
@@ -290,7 +323,7 @@ function ClanoviTimaSection() {
                         <div className='stat-ikona zelena'><i className="bi bi-person-fill-check"></i></div>
                         <div className='stat-tekst'>
                             <p>Slobodni</p>
-                            <h3>{stats.slobodni}</h3>
+                            <h3>{statistika.slobodni}</h3>
                         </div>
                     </div>
 
@@ -298,7 +331,7 @@ function ClanoviTimaSection() {
                         <div className='stat-ikona zuta'><i className="bi bi-person-fill-dash"></i></div>
                         <div className='stat-tekst'>
                             <p>Zauzeti</p>
-                            <h3>{stats.zauzeti}</h3>
+                            <h3>{statistika.zauzeti}</h3>
                         </div>
                     </div>
 
@@ -306,7 +339,7 @@ function ClanoviTimaSection() {
                         <div className='stat-ikona siva'><i className="bi bi-person-fill-slash"></i></div>
                         <div className='stat-tekst'>
                             <p>Nedostupni</p>
-                            <h3>{stats.nedostupan}</h3>
+                            <h3>{statistika.nedostupni}</h3>
                         </div>
                     </div>
                 </div>

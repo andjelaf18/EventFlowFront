@@ -1,9 +1,9 @@
-import './PomocOdKoordSection.css'
+import './PomocOdKoordinatora.css'
 import Alert from '../Alerts/Alerts';
 
 import { useState, useEffect } from 'react';
 
-function PomocOdKoordSection() {
+function PomocOdKoordinatora() {
 
     //alerts
     const [alertInfo, setAlertInfo] = useState({
@@ -197,4 +197,4 @@ function PomocOdKoordSection() {
 
         </>
     )
-} export default PomocOdKoordSection
+} export default PomocOdKoordinatora

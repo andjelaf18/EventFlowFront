@@ -40,7 +40,7 @@ function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        setLoading(true);
         const korisnik = {
             KorisnickoIme,
             Lozinka
@@ -57,7 +57,7 @@ function Login() {
 
             if (res.ok) {
                 const data = await res.json(); // Ovde dobijaš { tokenString: "..." }
-
+console.log("LOGIN RESPONSE:", data);
                 // 1. Sačuvaj token da bi ostala ulogovana
                 localStorage.setItem("token", data.tokenString);
                 localStorage.setItem("id", data.userId);
@@ -97,16 +97,19 @@ function Login() {
             setPoruka("Greška sa serverom!");
             setTipPoruke("danger");
         }
+        finally {
+            setLoading(false);
+        }
     };
 
     return (
         <>
-         {loading && (
-            <div className="loader-blocker">
-                <div className="loader-spinner"></div>
-                <p>Prijavljivanje...</p>
-            </div>
-        )}
+            {loading && (
+                <div className="loader-blocker">
+                    <div className="loader-spinner"></div>
+                    <p>Prijavljivanje...</p>
+                </div>
+            )}
             <div className="login">
 
                 <h1>Log in</h1>
@@ -121,32 +124,33 @@ function Login() {
 
                     <div className='row'>
 
-                        <input className="form-control mb-3"
+                        <input className="form-control "
                             placeholder="Username"
                             value={KorisnickoIme}
                             required
                             onChange={e => setUserName(e.target.value)} />
 
-                        <div className="password-wrapper mb-3">
-                    <input className="form-control" 
-                            placeholder="Lozinka"
-                            value={Lozinka} 
-                            type={showPassword ? "text" : "password"}
-                            required
-                            onChange={e => setPassword(e.target.value)} />
+                        <div className="password-input-wrapper">
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                className="form-control"
+                                placeholder="Lozinka"
+                                value={Lozinka}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
 
-                    <button
-                        type="button"
-                        className="password-toggle"
-                        onClick={() => setShowPassword(!showPassword)}
-                    >
-                        <i className={showPassword ? "bi bi-eye-slash" : "bi bi-eye"}></i>
-                    </button>
-                </div>
+                            <button
+                                type="button"
+                                className="password-toggle-btn"
+                                onClick={() => setShowPassword(!showPassword)}
+                            >
+                                <i className={`bi ${showPassword ? "bi-eye" : "bi-eye-slash"}`}></i>
+                            </button>
+                        </div>
 
-                <button className="btn btn-primary form-control" disabled={loading}>
-                    Uloguj se
-                </button>
+                        <button className="btn btn-primary form-control" disabled={loading}>
+                            Uloguj se
+                        </button>
                     </div>
                 </form>
 

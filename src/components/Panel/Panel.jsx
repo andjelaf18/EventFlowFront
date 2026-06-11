@@ -7,8 +7,14 @@ import { useNavigate, Link } from "react-router-dom";
 
 function Panel(){
 
-    const [korisnik, setKorisnik] = useState({ username: "", role: "" });
+    const profilnaSlika = localStorage.getItem("imageUrl");
+    const korisnickoIme = localStorage.getItem("username") || "Korisnik";
     const navigate = useNavigate();
+ const [korisnik, setKorisnik] = useState({
+    username: localStorage.getItem("username") || "",
+    role: "",
+    imageUrl: localStorage.getItem("imageUrl") || ""
+});
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -21,9 +27,16 @@ function Panel(){
 
                 // Izvlačimo username i ulogu iz claims-a
                 setKorisnik({
-                    username: payload["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"] || "Korisnik",
-                    role: payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]
-                });
+    username:
+        payload["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"] ||
+        localStorage.getItem("username") ||
+        "Korisnik",
+
+    role:
+        payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"],
+
+    imageUrl: localStorage.getItem("imageUrl") || ""
+});
             } catch (error) {
                 console.error("Greška pri čitanju tokena", error);
             }
@@ -34,6 +47,12 @@ function Panel(){
     const handleLogout = () => {
         localStorage.removeItem("token");
         navigate("/login");
+        localStorage.removeItem("token");
+localStorage.removeItem("id");
+localStorage.removeItem("username");
+localStorage.removeItem("imageUrl");
+localStorage.removeItem("imageUsername");
+navigate("/login");
     };
 
     const stavkeMenija = {
@@ -63,7 +82,7 @@ function Panel(){
             { naziv: "Dashboard", putanja: "/participant", ikona: "bi bi-house-door" },
             { naziv: "Agenda", putanja: "/participant/agenda", ikona: "bi bi-clipboard" },
           //  { naziv: "Moji Zahtevi", putanja: "/participant/zahtevi", ikona: "bi bi-list-ol" },
-           //?? da li i partiicpant moze da trazi pomoc { naziv: "Traži pomoć", putanja: "/participant/pomoc-od-koordinatora", ikona: "bi bi-question-circle"}, 
+            { naziv: "Traži pomoć", putanja: "/participant/pomoc-od-koordinatora", ikona: "bi bi-question-circle"}, 
             { naziv: "Profil", putanja: "/participant/profil-podesavanja", ikona: "bi bi-gear"}
         ]
     };
@@ -74,22 +93,31 @@ function Panel(){
         <>
 
         <div className='levo'>
-            <div className='profil-sekcija'>
-                <div className='avatar-krug'>
-                    {korisnik.username ? korisnik.username.charAt(0).toUpperCase() : "?"}
-                </div>
-                <h2 className="user-ime">{korisnik.username}</h2>
-                <span className="user-role">{korisnik.role}</span>
-            </div>
-
+           <div className='profil-sekcija'>
+<div className="avatar-krug">
+    {korisnik.imageUrl ? (
+        <img
+            src={korisnik.imageUrl}
+            alt="Profil"
+            className="avatar-slika"
+            onError={() => {
+                console.log("Slika ne može da se učita:", korisnik.imageUrl);
+                setKorisnik(prev => ({
+                    ...prev,
+                    imageUrl: ""
+                }));
+            }}
+        />
+    ) : (
+        korisnik.username
+            ? korisnik.username.charAt(0).toUpperCase()
+            : "?"
+    )}
+    
+</div>
+<h2 className="user-ime">{korisnik.username}</h2>
+<span className="user-role">{korisnik.role}</span>
             <nav className='meni-linkovi'>
-               {/* <Link to="/koordinator" className="nav-stavka">Dashboard</Link>
-                    {korisnik.role === 'Koordinator' && (
-                        <>
-                            <Link to="/koordinator/clanovi" className="nav-stavka">Članovi tima</Link>
-                            <Link to="/koordinator/agenda" className="nav-stavka">Agenda</Link>
-                        </>
-                    )} */}
                    {trenutneStavke.map((stavka, index) => (
                     <Link key={index} to={stavka.putanja} className="nav-stavka">
                         <i className={`${stavka.ikona} me-2`}></i> 
@@ -98,6 +126,7 @@ function Panel(){
                 ))}
                 <button onClick={handleLogout} className="btn-logout">Odjavi se</button>
             </nav>
+        </div>
         </div>
 
         </>
